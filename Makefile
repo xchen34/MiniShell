@@ -90,5 +90,3 @@ fclean: clean
 
 # Recompile all content
 re: fclean all
-
-.PHONY: clean fclean re all
