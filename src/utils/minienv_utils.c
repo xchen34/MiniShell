@@ -6,34 +6,32 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 13:37:20 by yu-chen           #+#    #+#             */
-/*   Updated: 2024/06/27 17:58:11 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 16:45:09 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*get_value(char *keypair)
+char *get_value(char *keypair)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	while (keypair[i] && keypair[i] != '=')
-		i++;
-	if (!keypair[i])
-		return (NULL);
-	return (&keypair[i + 1]);
+    i = 0;
+    while (keypair[i] && keypair[i] != '=')
+        i++;
+    if (!keypair[i])
+        return (NULL);
+    return (&keypair[i + 1]);
 }
 
 char *get_key(char *keypair)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	while (keypair[i] && keypair[i] != '=')
-		i++;
-	if (!keypair[i])
-		return (NULL);
-	return (ft_substr(keypair, 0, i));
+    i = 0;
+    while (keypair[i] && keypair[i] != '=')
+        i++;
+    return (ft_substr(keypair, 0, i));
 }
 
 
@@ -81,5 +79,4 @@ char *create_keypair(char *key,  char *value)
     ft_strlcat(keypair, value, total_len);
     return (keypair);
 }
-
 

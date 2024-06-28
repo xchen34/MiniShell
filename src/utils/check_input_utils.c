@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 17:03:42 by yu-chen           #+#    #+#             */
-/*   Updated: 2024/06/25 19:03:41 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 17:47:03 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ char	*find_redir_pos(char *str, char redir_char)
 	}
 	return (NULL);
 }
+
+
+
+
 
 int	print_syntax_error(char *token) //打印语法错误
 {

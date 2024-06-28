@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 15:38:06 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 18:01:18 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:30:03 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	clean_up_exit(char **args, t_env **minienv, int exit_status, int flag)
 	if (minienv)
 		free_minienv(minienv);
 	close_all_fds();
-	check_args_error(args);
+	//check_args_error(args);
 	if (args)
 		free_str_array(args);
 	exit(exit_status);

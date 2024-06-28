@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:53:46 by yu-chen           #+#    #+#             */
-/*   Updated: 2024/06/15 17:58:27 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 15:05:14 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int is_unclosed_quotes(char *s)
 
 int	is_empty(char *str)
 {
-	if (!str)
+	if (!str || str[0] == '\0')
 		return (1);
 	while (*str)
 	{
@@ -69,6 +69,6 @@ int	is_input_error(char *input, int *exit_status, t_env *minienv)
 	else if (handle_heredoc(input, exit_status, minienv) == 0) 
 		is_error = 1;
 	if (is_error == 1)
-		free(input);
+		free_str(input);
 	return (is_error);
 }
