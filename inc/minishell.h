@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:39:19 by yu-chen           #+#    #+#             */
-/*   Updated: 2024/06/28 12:36:52 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 13:44:45 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <signal.h> // sigaction
 # include <fcntl.h> // open flags
 # include <limits.h>  //llong max    
-# include "defines.h"
 # include "structs.h"
 
 
