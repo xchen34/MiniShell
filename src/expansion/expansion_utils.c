@@ -6,18 +6,11 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:34:47 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 19:23:58 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 12:31:02 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
- int	is_valid_varchar(char c)
-{
-	if (ft_isalnum(c) || c == '_')
-		return (1);
-	return (0);
-}
 
 int	varname_size(char *s)
 {
@@ -35,7 +28,35 @@ int	varname_size(char *s)
     return (i);  
 }
 
-char *find_var_pos(char *input)
+static int check_expansion_format(char *s) //s starts with '$'
+{
+	int i;
+
+	i = 0;
+	if (s[i] == '$')
+	{
+		if (s[i + 1] == '{')
+		{
+			i+=2;
+			while (s[i] && s[i] != '}')
+			{
+				if (!is_valid_varchar(s[i]))
+					return (FALSE);
+				i++;
+			}
+			if (s[i] == '}')
+				return (TRUE);
+		}
+		else if (is_valid_varchar(s[i + 1]))
+			return (TRUE);
+		return (FALSE);
+	}
+	return (FALSE);
+}
+
+
+
+char *find_var_pos(char *input) //返回的变量以‘$’
 {
     int i;
 	
@@ -49,15 +70,15 @@ char *find_var_pos(char *input)
             i++;
             while (input[i] && input[i] != '\"')
 			{
-                if (input[i] == '$' && is_valid_varchar(input[i + 1]))
-                    return (input + i + 1);
+                if (check_expansion_format(input + i) == TRUE)
+                    return (input + i);
                 i++;
             }
             if (input[i])
                 i++;
         }
-        if (input[i] == '$' && is_valid_varchar(input[i + 1]))
-            return (input + i + 1);
+        if (check_expansion_format(input + i) == TRUE)
+            return (input + i);
         i++;
     }
     return (NULL);
@@ -82,7 +103,7 @@ void	var_not_at_start(char **input, char *var_value, char *after_var, char *pos)
 	char *until_var;
 	char *tmp;
 
-    until_var = ft_substr(*input, 0, pos - *input - 1);
+    until_var = ft_substr(*input, 0, pos - *input);
 	if (!var_value)
 		updated_input = ft_strjoin(until_var, after_var);
 	else
