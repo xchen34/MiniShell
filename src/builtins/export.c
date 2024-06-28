@@ -6,12 +6,11 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:19:36 by yu-chen           #+#    #+#             */
-/*   Updated: 2024/06/27 15:44:02 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 16:45:40 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
 
 static void	print_varname_error_msg(char *command, char *varname)
 {
@@ -22,7 +21,7 @@ static void	print_varname_error_msg(char *command, char *varname)
 	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 }
 
-static int  export_without_arg(t_env *minienv)
+static int	export_without_arg(t_env *minienv)
 {
 	t_env	*cur;
 
@@ -44,41 +43,43 @@ static int  export_without_arg(t_env *minienv)
 	return (0);
 }
 
-int is_valid_varname(char *s)
+int	is_valid_varname(char *s)
 {
-    int len;
-	
-	len = varname_size(s);
-    return (len > 0 && s[len] == '\0');
+	int	i;
+
+	if (!s || !s[0] || (!ft_isalpha(s[0]) && s[0] != '_'))
+		return (0);
+	i = 1;
+	while (s[i] && (ft_isalnum(s[i]) || s[i] == '_'))
+		i++;
+	return (s[i] == '\0');
 }
 
-
-int builtin_export(char **args, t_env **minienv)
+int	builtin_export(char **args, t_env **minienv)
 {
-    char *key_pair;
-    char *varname;
-    int exit_status;
+	char	*key_pair;
+	char	*varname;
+	int		exit_status;
 
-    args++;
-    exit_status = EXIT_SUCCESS;
-    if (!*args)
-        return (export_without_arg(*minienv));
-    while (*args) {
-        key_pair = *args;
-        varname = get_key(key_pair);
-        if (!is_valid_varname(varname) || ft_strncmp(key_pair, "=", 1) == 0)
+	args++;
+	exit_status = EXIT_SUCCESS;
+	if (!*args)
+		return (export_without_arg(*minienv));
+	while (*args)
+	{
+		key_pair = *args;
+		varname = get_key(key_pair);
+		if (!is_valid_varname(varname) || ft_strncmp(key_pair, "=", 1) == 0)
 		{
-            print_varname_error_msg("export", key_pair);
-            exit_status = EXIT_FAILURE;
-        } else if (find_node(varname, *minienv)) {
-            minienv_update(varname, get_value(key_pair), *minienv);
-        } else {
-            list_append(key_pair, minienv);
-        }
-        free(varname);
-        args++;
-    }
-    return exit_status;
+			print_varname_error_msg("export", key_pair);
+			exit_status = EXIT_FAILURE;
+		}
+		else if (find_node(varname, *minienv))
+			minienv_update(varname, get_value(key_pair), *minienv);
+		else
+			list_append(key_pair, minienv);
+		free(varname);
+		args++;
+	}
+	return (exit_status);
 }
-
-

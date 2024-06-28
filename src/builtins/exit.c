@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:16:11 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 17:52:11 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:31:00 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	shell_exit(char **args, t_env **minienv)
 {
 	long long	exit_status;
 
+	check_args_error(args);
 	exit_status = 0;
 	if (args && args[1])
 	{

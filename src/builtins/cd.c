@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:16:11 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/26 17:06:12 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 14:37:21 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int cd(char **args, t_env *minienv)
 		return (EXIT_FAILURE);
 	if (chdir(path) == -1) // Change the current working directory.
 	{
-		print_error_msg("cd", path);
+		print_perror_msg("cd", path);
 		return (EXIT_FAILURE);
 	}
 	if (args[1] && ft_strncmp(args[1], "-", 2) == 0)  //单独处理这个是因为标准的cd -会打印路径
