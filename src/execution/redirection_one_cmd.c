@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:18:57 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 18:21:30 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 17:46:41 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int handle_outfile_redir(char *cmd, int original_fd[2])
     free(file);
     return (1);
 }
+
+
 
 int handle_redirects(char *cmd, int original_fds[2])
 {

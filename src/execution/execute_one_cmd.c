@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chen_one_cmd.c                                     :+:      :+:    :+:   */
+/*   execute_one_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:02:31 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 17:22:10 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 15:30:39 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int execute_one_cmd(char *cmd, t_env **minienv)
 
 int is_builtin(char *cmd)
 {
+	if (!cmd || !*cmd) 
+		return (0);
 	if (ft_strncmp(cmd, "echo", 4) == 0 && cmd[4] == '\0')
 		return (1);
 	if (ft_strncmp(cmd, "cd", 2) == 0 && cmd[2] == '\0')
