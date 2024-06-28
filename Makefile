@@ -41,6 +41,7 @@ SRCS = $(SRC_DIR)/main.c \
        $(EXECUTION_DIR)/redirection_utils.c \
        $(EXPANSION_DIR)/expansion.c \
        $(EXPANSION_DIR)/expansion_utils.c \
+	     $(EXPANSION_DIR)/expansion_utils2.c \
        $(HEREDOC_DIR)/heredoc.c \
        $(HEREDOC_DIR)/heredoc_utils.c \
        $(PARSER_DIR)/parse_cmd_utils2.c \
