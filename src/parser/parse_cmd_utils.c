@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_one_cmd_utils2.c                           :+:      :+:    :+:   */
+/*   parse_cmd_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:22:35 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 18:23:09 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 17:18:58 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void replace_inquote_spaces(char *cmd)  //在这段代码中，`cmd[i] = -1;` �
             while (cmd[i] && cmd[i] != quote)
             {
                 if (cmd[i] == ' ')
-                    cmd[i] = -1;
+                    cmd[i] = '\x01';
                 i++;
             }
             if (cmd[i])
@@ -82,7 +82,7 @@ void	reset_spaces(char **args)
 		j = 0;
 		while (args[i][j])
 		{
-			if (args[i][j] == -1)
+			if (args[i][j] == '\x01')
 				args[i][j] = ' ';
 			j++;
 		}

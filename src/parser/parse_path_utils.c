@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parse_path_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:29:24 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 18:29:29 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 16:18:39 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	is_folder(char *cmd)
 void	command_exit(char **args, t_env *minienv, int exit_status)
 {
 	if (exit_status == 126)
-		print_error_msg(args[0], "is a directory");
+		print_error_msg(args[0], "Is a directory");
 	if (exit_status == 127)
 		print_error_msg(args[0], "command not found");
 	rl_clear_history();
