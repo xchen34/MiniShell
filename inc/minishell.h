@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 14:39:19 by yu-chen           #+#    #+#             */
-/*   Updated: 2024/06/27 18:48:56 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/28 12:36:52 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,12 @@ int	varname_size(char *s);
 char	*find_var_pos(char *input);
 void var_at_start(char **input, char *var_value, char *after_var);
 void	var_not_at_start(char **input, char *var_value, char *after_var, char *pos);
-void	update_input(char **input, char *var_value, char *after_var);
 void	expand_variables(char **input, t_env *minienv);
 void	handle_expansions(char **input, t_env *minienv, int exit_status);
 
 //chen_expansion.c
 void	expand_exit_status(char **input, int exit_status);
+int find_exit_marker(char *s);
 
 //free.c         leo
 void    free_str_array(char **s);
