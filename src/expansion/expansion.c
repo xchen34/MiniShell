@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 13:59:36 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/28 12:53:29 by leochen          ###   ########.fr       */
+/*   Updated: 2024/07/01 16:35:02 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,43 +44,57 @@ void	expand_exit_status(char **input, int exit_status)
 	//printf("expanded exit str:%s\n", *input);
 }
 
+static void extract_var_info(char *pos, char **var_name, char **after_var)
+{
+    int name_size;
 
+    if (*(pos + 1) == '{')
+    {
+        name_size = varname_size(pos + 2);
+        *var_name = ft_substr(pos + 2, 0, name_size);
+        *after_var = ft_strdup(pos + 3 + name_size);  // Assuming '}' is immediately after the name
+    }
+    else
+    {
+        name_size = varname_size(pos + 1);
+        *var_name = ft_substr(pos + 1, 0, name_size);
+        *after_var = ft_strdup(pos + 1 + name_size);
+    }
+}
 
+static void expand_single_variable(char **input, char **pos, t_env *minienv)
+{
+    char *var_name;
+    char *var_value;
+    char *after_var;
+
+    extract_var_info(*pos, &var_name, &after_var);
+
+    var_value = minienv_value(var_name, minienv);
+    free(var_name);
+    if (*pos == *input)
+    {
+        var_at_start(input, var_value, after_var);
+    }
+    else
+    {
+        var_not_at_start(input, var_value, after_var, *pos);
+    }
+
+    free(after_var);
+}
 
 void expand_variables(char **input, t_env *minienv)
 {
     char *pos;
-	char *var_name;
-	char *var_value;
-	char *after_var;
-	int name_size;
 
-	pos = find_var_pos(*input);
+    pos = find_var_pos(*input);
     while (pos)
-	{
-        if (*(pos + 1) == '{')
-		{
-            name_size = varname_size(pos + 2);
-            var_name = ft_substr(pos + 2, 0, name_size);
-            after_var = ft_strdup(pos + 3 + name_size);  // Assuming '}' is immediately after the name
-        }
-		else
-		{
-            name_size = varname_size(pos + 1);
-            var_name = ft_substr(pos + 1, 0, name_size);
-            after_var = ft_strdup(pos + 1 + name_size);
-        }
-        var_value = minienv_value(var_name, minienv);
-        free(var_name);
-        if (pos == *input)
-            var_at_start(input, var_value, after_var);
-        else 
-            var_not_at_start(input, var_value, after_var, pos);
-        free(after_var);
+    {
+        expand_single_variable(input, &pos, minienv);
         pos = find_var_pos(*input); // Re-find position as the input has changed
     }
 }
-
 void	handle_expansions(char **input, t_env *minienv, int exit_status)
 {
 	expand_exit_status(input, exit_status);

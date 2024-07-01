@@ -6,7 +6,7 @@
 /*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:34:47 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/28 12:31:02 by leochen          ###   ########.fr       */
+/*   Updated: 2024/07/01 16:36:00 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static int check_expansion_format(char *s) //s starts with '$'
 }
 
 
-
-char *find_var_pos(char *input) //返回的变量以‘$’
+//返回的变量以‘$’
+char *find_var_pos(char *input) 
 {
     int i;
 	
@@ -83,7 +83,6 @@ char *find_var_pos(char *input) //返回的变量以‘$’
     }
     return (NULL);
 }
-
 
 void var_at_start(char **input, char *var_value, char *after_var)
 {
