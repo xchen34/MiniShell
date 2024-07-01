@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yu-chen <yu-chen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:16:11 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/28 14:31:00 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/29 14:16:32 by yu-chen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static char *skip_space(char **s)
+static char	*skip_space(char **s)
 {
 	while (ft_isspace(**s) && **s)
 		(*s)++;
 	return (*s);
 }
 
-static int is_llong_min(char *s, long long *nb)
+static int	is_llong_min(char *s, long long *nb)
 {
 	if (ft_strncmp(s, "-9223372036854775808", 21) == 0)
 	{
@@ -29,9 +29,9 @@ static int is_llong_min(char *s, long long *nb)
 	return (0);
 }
 
-static int handle_sign(char **s)
-{	
-	int sign;
+static int	handle_sign(char **s)
+{
+	int	sign;
 
 	sign = 1;
 	if (**s == '-' || **s == '+')
@@ -44,10 +44,11 @@ static int handle_sign(char **s)
 		sign = 1;
 	return (sign);
 }
+
 int	str_to_ll(char *s, long long *nb)
 {
 	long long	res;
-	int	sign;
+	int			sign;
 
 	s = skip_space(&s);
 	res = 0;
@@ -60,10 +61,9 @@ int	str_to_ll(char *s, long long *nb)
 	{
 		if (*s < '0' || *s > '9')
 			return (0);
-		if (res  > (LLONG_MAX - (*s - '0')) / 10)   //优势：避免了乘法操作直接引起的溢出。
+		if (res > (LLONG_MAX - (*s - '0')) / 10) //优势：避免了乘法操作直接引起的溢出。
 			return (0);
 		res = res * 10 + (*s - '0');
-
 		s++;
 	}
 	*nb = res * sign;
@@ -79,7 +79,7 @@ int	shell_exit(char **args, t_env **minienv)
 	if (args && args[1])
 	{
 		str_to_ll(args[1], &exit_status);
-		if (exit_status >=0)
+		if (exit_status >= 0)
 			exit_status = exit_status % 256;
 		else
 			exit_status = 256 + (exit_status % 256);

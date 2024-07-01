@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yu-chen <yu-chen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:03:44 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 14:04:11 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/29 14:16:04 by yu-chen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-//echo
-int is_minus_n(char *s)
+// echo
+int	is_minus_n(char *s)
 {
 	if (s[0] != '-')
 		return (0);

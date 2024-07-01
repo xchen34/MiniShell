@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yu-chen <yu-chen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:03:44 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 16:03:31 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/29 14:16:09 by yu-chen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int env(t_env *minienv)
+int	env(t_env *minienv)
 {
 	t_env	*i;
 
