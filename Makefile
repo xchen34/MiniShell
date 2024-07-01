@@ -39,9 +39,10 @@ SRCS = $(SRC_DIR)/main.c \
        $(EXECUTION_DIR)/redirection_multi_cmds.c \
        $(EXECUTION_DIR)/redirection_one_cmd.c \
        $(EXECUTION_DIR)/redirection_utils.c \
+	   $(EXECUTION_DIR)/redirection_utils2.c \
        $(EXPANSION_DIR)/expansion.c \
        $(EXPANSION_DIR)/expansion_utils.c \
-	     $(EXPANSION_DIR)/expansion_utils2.c \
+	   $(EXPANSION_DIR)/expansion_utils2.c \
        $(HEREDOC_DIR)/heredoc.c \
        $(HEREDOC_DIR)/heredoc_utils.c \
        $(PARSER_DIR)/parse_cmd_utils2.c \
@@ -53,8 +54,9 @@ SRCS = $(SRC_DIR)/main.c \
        $(UTILS_DIR)/check_input_utils.c \
        $(UTILS_DIR)/cleaner.c \
        $(UTILS_DIR)/close_fd.c \
-       $(UTILS_DIR)/input_errors2.c \
        $(UTILS_DIR)/input_errors.c \
+	   $(UTILS_DIR)/input_errors2.c \
+	   $(UTILS_DIR)/input_error3.c \
        $(UTILS_DIR)/minienv_init.c \
        $(UTILS_DIR)/minienv_utils2.c \
        $(UTILS_DIR)/minienv_utils.c \
@@ -89,4 +91,4 @@ fclean: clean
 	make -C $(LIBFT_DIR) fclean
 
 # Recompile all content
-re: fclean all
+re: clean fclean all
