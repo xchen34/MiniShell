@@ -3,48 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   execute_one_cmd_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yu-chen <yu-chen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:12:15 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/29 15:16:30 by yu-chen          ###   ########.fr       */
+/*   Updated: 2024/07/01 17:35:16 by leochen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	execute_normal_cmd(char **args, t_env *minienv)
-{
-	char	*cmd;
-	int		pid;
-	char	*path;
-	char	**envp;
 
-	cmd = args[0];
-	pid = fork();                //和_executet_normal_cmd相比 多了fork
-	define_execute_signals(pid); //也多了信号处理 和pid的检查
-	if (pid == 0)
-	{
-		if (is_empty(cmd))
-			command_exit(args, minienv, 0);
-		if (is_folder(cmd))
-			command_exit(args, minienv, 126);
-		path = get_path(cmd, minienv);
-		if (!path && minienv_value("PATH", minienv) != NULL)
-			command_exit(args, minienv, 127);
-		else if (!path)
-			path = ft_strdup(cmd);
-		envp = from_minienv_to_env(minienv);
-		rl_clear_history();
-		close_extra_fds();
-		free_minienv(&minienv);
-		if (execve(path, args, envp) == -1)
-			exec_error(args, path, envp);
-	}
-	else if (pid > 0)
-		return (wait_for_child(pid, 1));
-	else
-		print_perror_msg("fork", "");
-	exit(1);
+
+// int	execute_normal_cmd(char **args, t_env *minienv)
+// {
+// 	char	*cmd;
+// 	int		pid;
+// 	char	*path;
+// 	char	**envp;
+
+// 	cmd = args[0];
+// 	pid = fork();                //和_executet_normal_cmd相比 多了fork
+// 	define_execute_signals(pid); //也多了信号处理 和pid的检查
+// 	if (pid == 0)
+// 	{
+// 		if (is_empty(cmd))
+// 			command_exit(args, minienv, 0);
+// 		if (is_folder(cmd))
+// 			command_exit(args, minienv, 126);
+// 		path = get_path(cmd, minienv);
+// 		if (!path && minienv_value("PATH", minienv) != NULL)
+// 			command_exit(args, minienv, 127);
+// 		else if (!path)
+// 			path = ft_strdup(cmd);
+// 		envp = from_minienv_to_env(minienv);
+// 		rl_clear_history();
+// 		close_extra_fds();
+// 		free_minienv(&minienv);
+// 		if (execve(path, args, envp) == -1)
+// 			exec_error(args, path, envp);
+// 	}
+// 	else if (pid > 0)
+// 		return (wait_for_child(pid, 1));
+// 	else
+// 		print_perror_msg("fork", "");
+// 	exit(1);
+// }
+
+static void execute_in_child(char **args, t_env *minienv)
+{
+    char *cmd;
+    char *path;
+    char **envp;
+
+    cmd = args[0];
+    if (is_empty(cmd))
+        command_exit(args, minienv, 0);
+    if (is_folder(cmd))
+        command_exit(args, minienv, 126);
+    path = get_path(cmd, minienv);
+    if (!path && minienv_value("PATH", minienv) != NULL)
+        command_exit(args, minienv, 127);
+    else if (!path)
+        path = ft_strdup(cmd);
+    envp = from_minienv_to_env(minienv);
+    rl_clear_history();
+    close_extra_fds();
+    free_minienv(&minienv);
+    if (execve(path, args, envp) == -1)
+        exec_error(args, path, envp);
+}
+
+int execute_normal_cmd(char **args, t_env *minienv)
+{
+    int pid;
+
+    pid = fork();
+    define_execute_signals(pid);
+    if (pid == 0)
+    {
+        execute_in_child(args, minienv);
+    }
+    else if (pid > 0)
+    {
+        return (wait_for_child(pid, 1));
+    }
+    else
+    {
+        print_perror_msg("fork", "");
+    }
+    exit(1);
 }
 
 int	wait_for_child(int pid, int is_last_child)
