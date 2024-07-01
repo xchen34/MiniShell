@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yu-chen <yu-chen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:53:46 by yu-chen           #+#    #+#             */
-/*   Updated: 2024/06/28 15:05:14 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:02:40 by yu-chen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	print_unclosedquote_err(void)
 	return (1);
 }
 
-int is_unclosed_quotes(char *s)
+int	is_unclosed_quotes(char *s)
 {
-	char quote;
-	
+	char	quote;
+
 	quote = 0;
 	while (*s)
 	{
@@ -36,7 +36,7 @@ int is_unclosed_quotes(char *s)
 	}
 	if (quote)
 		return (print_unclosedquote_err());
-	return 0;
+	return (0);
 }
 
 int	is_empty(char *str)
@@ -66,7 +66,7 @@ int	is_input_error(char *input, int *exit_status, t_env *minienv)
 		*exit_status = 2; // why 2?
 		is_error = 1;
 	}
-	else if (handle_heredoc(input, exit_status, minienv) == 0) 
+	else if (handle_heredoc(input, exit_status, minienv) == 0)
 		is_error = 1;
 	if (is_error == 1)
 		free_str(input);

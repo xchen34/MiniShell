@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   close_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yu-chen <yu-chen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:12 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/27 18:15:21 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:02:29 by yu-chen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-
 
 void	close_extra_fds(void)
 {
@@ -36,7 +34,7 @@ void	close_all_fds(void)
 	close(STDERR_FILENO);
 }
 
-void clean_exit(char **splited_cmds, t_env **minienv)
+void	clean_exit(char **splited_cmds, t_env **minienv)
 {
 	rl_clear_history();
 	free_str_array(splited_cmds);

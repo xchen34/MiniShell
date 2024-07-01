@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minienv_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yu-chen <yu-chen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 13:37:20 by yu-chen           #+#    #+#             */
-/*   Updated: 2024/06/28 16:45:09 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:03:22 by yu-chen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ t_env	*find_node(char *key, t_env *minienv)  //根据提供的key查找某一个
 	}
 	return (NULL);
 }
-
 
 char *create_keypair(char *key,  char *value)
 {
