@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leochen <leochen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yu-chen <yu-chen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:22:35 by leochen           #+#    #+#             */
-/*   Updated: 2024/06/28 17:18:58 by leochen          ###   ########.fr       */
+/*   Updated: 2024/06/29 15:18:44 by yu-chen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int has_quote(char *cmd)
+int	has_quote(char *cmd)
 {
 	while (cmd && *cmd)
 	{
@@ -23,33 +23,31 @@ int has_quote(char *cmd)
 	return (0);
 }
 
-void replace_inquote_spaces(char *cmd)  //在这段代码中，`cmd[i] = -1;` 是将字符串 `cmd` 中的空格字符（' '）替换为 ASCII 值为 -1 的字符。这样做的目的是为了在后续的代码中，将这些字符作为分隔符来分割字符串。
+void	replace_inquote_spaces(char *cmd)
 {
-    int i;
-    char quote;
+	int		i;
+	char	quote;
 
-    i = 0;
+	i = 0;
 	while (cmd[i])
-    {
-        if (cmd[i] == '"' || cmd[i] == '\'')
-        {
-            quote = cmd[i];
-            i++;
-            while (cmd[i] && cmd[i] != quote)
-            {
-                if (cmd[i] == ' ')
-                    cmd[i] = '\x01';
-                i++;
-            }
-            if (cmd[i])
-                i++;
-        }
-        else
-            i++;
-    }
+	{
+		if (cmd[i] == '"' || cmd[i] == '\'')
+		{
+			quote = cmd[i];
+			i++;
+			while (cmd[i] && cmd[i] != quote)
+			{
+				if (cmd[i] == ' ')
+					cmd[i] = '\x01';
+				i++;
+			}
+			if (cmd[i])
+				i++;
+		}
+		else
+			i++;
+	}
 }
-
-
 
 void	remove_quotes(char *cmd)
 {
@@ -90,7 +88,6 @@ void	reset_spaces(char **args)
 	}
 }
 
-
 int	has_pipe(char *s)
 {
 	int	i;
@@ -100,7 +97,7 @@ int	has_pipe(char *s)
 	{
 		if (s[i] == '\'' || s[i] == '\"')
 			i = skip_quotes(s, i, s[i]);
-		else 
+		else
 		{
 			if (s[i] == '|')
 				return (1);
